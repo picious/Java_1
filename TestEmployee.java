@@ -3,8 +3,10 @@
  */
 public class TestEmployee {
 
-  public static void main(String[] args) {
+  public static void main(String[] args)
+  {
 
-    System.out.println("test");
+    Employee kostas = new Employee("Κώστας", "YE", 1,1,true,1,2);
+    kostas.printEmployee();
 
   }

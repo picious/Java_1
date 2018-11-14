@@ -9,148 +9,70 @@
  * Create a class for Employee
  */
 public class Employee {
-
+  // Question 1
   private String name;
   private String education;
-  private int masterStudies;
-  private boolean married;
+  private int postGrad;
   private int years;
-  private int childrens;
+  private boolean married;
+  private int noChildren;
   private int salary;
   private int bonus;
 
-  /**
-   * Create a constructor with name - String - name and surname,
-   * 
-   * educationLevel - String ("YE", "DE" or "ME"),
-   * 
-   * masterStudies - int (0,1 or 2 where 0 = No, 1=Master, 2=PhD),
-   * 
-   * married - boolean true = yes , false = no,
-   * 
-   * years - int (years of service = yos),
-   * 
-   * childrens - int (number of underage childrens = noc),
-   * 
-   * salary - int (sal),
-   * 
-   * bonus - int (initial value = 0),
-   */
-
-  public Employee(String aName, String anEducation, int studiesType, boolean ifMarried, int yos, int noc, int sal) {
-
-    name = aName; // String
-    education = anEducation; // String
-    masterStudies = studiesType; // int
-    married = ifMarried; // boolean
-    years = yos; // int
-    childrens = noc; // int
-    salary = sal; // int
-    bonus = 0; // int
-
-  }
-
-  public void ifMarried() {
-    if (married == true) {
-      System.out.println("Έγγαμος/η");
+  public Employee(String fullName, String anEducation, int levelGrad, int noc, boolean ifMarried, int aNoChildren,
+      int aSalary) {
+    name = fullName;
+    education = anEducation;
+    if (levelGrad > 3 || levelGrad < 0) {
+      throw new IllegalArgumentException("PostGraduate Level must be between 0 and 3");
     } else {
-      System.out.println("Άγγαμος/η");
+      this.postGrad = levelGrad;
     }
+
+    years = noc;
+    married = ifMarried;
+    noChildren = aNoChildren;
+    salary = aSalary;
+    bonus = 0;
   }
 
-  // Seting up the getters-accessors
-  public Sting getName() {
+  public String getName() {
     return name;
   }
 
-  public Sting getEducation() {
-    return education;
-  }
-
-  public int getStudies() {
-    return masterStudies;
-  }
-
-  public boolean getMarried() {
-    return married;
-  }
-
-  public int getYears() {
-    return years;
-  }
-
-  public int getChildrens() {
-    return childrens;
-  }
-
-  public int getSalary() {
-    return salary;
-  }
-
-  public int getBonus() {
-    return bonus;
-  }
-
-  // Setting up the setters-mutators
-  /**
-   * @param name the name to set
-   */
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  /**
-   * @param education the education to set
-   */
-  public void setEducation(String education) {
-    this.education = education;
-  }
-
-  /**
-   * @param masterStudies the masterStudies to set
-   */
-  public void setMasterStudies(int masterStudies) {
-    this.masterStudies = masterStudies;
-  }
-
-  /**
-   * @param married the married to set
-   */
-  public void setMarried(boolean married) {
-    this.married = married;
-  }
-
-  /**
-   * @param years the years to set
-   */
-  public void setYears(int years) {
-    this.years = years;
-  }
-
-  /**
-   * @param childrens the childrens to set
-   */
-  public void setChildrens(int childrens) {
-    if (this.childrens >= 0) {
-      this.childrens = childrens;
+  public void setPostGrad(int postGrad) {
+    if (postGrad > 3 || postGrad < 0) {
+      throw new IllegalArgumentException("PostGraduate Level must be between 0 and 3");
     } else {
-      System.out
-          .println("*** Λάθος δεν επιτρέπεται αρνητικός αριθμός παιδιών");
+      this.postGrad = postGrad;
     }
   }
 
-  /**
-   * @param salary the salary to set
-   */
-  public void setSalary(int salary) {
-    this.salary = salary;
+  public void printEmployee() {
+    System.out.println("Printing Name: " + name);
+    switch (postGrad) {
+    case 0:
+      System.out.println("PostGrad Level : None");
+      break;
+    case 1:
+      System.out.println("PostGrad Level : MSc");
+      break;
+    case 2:
+      System.out.println("PostGrad Level : PhD");
+      break;
+    default:
+      break;
+    }
+    if (married) {
+      System.out.println("Κατάσταση: Έγγαμος");
+    } else {
+      System.out.println("Κατάσταση: Άγγαμος");
+    }
+
   }
 
-  /**
-   * @param bonus the bonus to set
-   */
-  public void setBonus(int bonus) {
-    this.bonus = bonus;
+  public void setName(String name) {
+    this.name = name;
   }
 
 }
