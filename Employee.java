@@ -19,6 +19,7 @@ public class Employee {
   private int salary;
   private int bonus;
 
+  // Constructor
   public Employee(String fullName, String anEducation, int levelGrad, int noc, boolean ifMarried, int aNoChildren,
       int aSalary) {
     name = fullName;
@@ -28,6 +29,7 @@ public class Employee {
     } else {
       throw new IllegalArgumentException("Η Βαθμίδα εκπαίδευσης θα πρέπει να είναι: ΥΕ, ΠΕ ή ΔΕ");
     }
+
     postGrad = levelGrad;
     if (levelGrad > 3 || levelGrad < 0) {
       throw new IllegalArgumentException("Παίρνει τιμές -> 0: δεν έχει, 1: Μεταπτυχιακό και 2: Διδακτορικό");
@@ -42,6 +44,11 @@ public class Employee {
     bonus = 0;
   }
 
+  // Getters
+
+  /**
+   * @return the name
+   */
   public String getName() {
     return name;
   }
@@ -69,6 +76,20 @@ public class Employee {
 
   public synchronized void increament() {
     years++;
+  }
+
+  /**
+   * @param bonus the bonus to set
+   */
+  public void setBonus(int bonus) {
+    if (postGrad == 0) {
+      bonus = 0;
+    } else if (postGrad == 1) {
+      bonus = 50;
+    } else {
+      bonus = 100;
+    }
+    this.bonus = (salary + (10 * years) + 50 + (noChildren * 30) + bonus);
   }
 
   public void setPostGrad(int postGrad) {
@@ -122,14 +143,11 @@ public class Employee {
     }
     System.out.println("Αριθμός Ανηλίκων Παιδιών: " + noChildren);
     System.out.println("Μισθός: " + salary + " euros");
-    if (postGrad == 0) {
-      bonus = 0;
-    } else if (postGrad == 1) {
-      bonus = 50;
+    if (bonus == 0) {
+      System.out.println("Μηνιαίο εισόδημα: " + salary + " euros");
     } else {
-      bonus = 100;
+      System.out.println("Bonus: " + bonus + " euros");
     }
-    System.out.println("Bonus: " + (salary + (10 * years) + 50 + (noChildren * 30) + bonus) + " euros");
 
     System.out.println("==============================");
   }
