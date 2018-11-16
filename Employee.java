@@ -1,4 +1,4 @@
-
+﻿
 /** ΑΝΤΙΚΕΙΜΕΝΟΣΤΡΕΦΗΣ ΑΝΑΠΤΥΞΗ ΛΟΓΙΣΜΙΚΟΥ
  *  A΄ Εξαμήνου Μεταπτυχιακού Προγράμματος στην Επιχειρηματική Πληροφορική
  *  Project 1: Ορισμός κλάσεων - η μέθοδος main
@@ -23,8 +23,14 @@ public class Employee {
       int aSalary) {
     name = fullName;
     education = anEducation;
+    if (anEducation == "ΥΕ" || anEducation == "ΠΕ" || anEducation == "ΔΕ") {
+      this.education = anEducation;
+    } else {
+      throw new IllegalArgumentException("Η Βαθμίδα εκπαίδευσης θα πρέπει να είναι: ΥΕ, ΠΕ ή ΔΕ");
+    }
+    postGrad = levelGrad;
     if (levelGrad > 3 || levelGrad < 0) {
-      throw new IllegalArgumentException("PostGraduate Level must be between 0 and 3");
+      throw new IllegalArgumentException("Παίρνει τιμές -> 0: δεν έχει, 1: Μεταπτυχιακό και 2: Διδακτορικό");
     } else {
       this.postGrad = levelGrad;
     }
@@ -40,39 +46,92 @@ public class Employee {
     return name;
   }
 
+  /**
+   * @return the years
+   */
+  public int getYears() {
+    return years;
+  }
+
+  /**
+   * @return the bonus
+   */
+  public int getBonus() {
+    return bonus;
+  }
+
+  /**
+   * @param years the years to set
+   */
+  public void setYears(int years) {
+    this.years = years;
+  }
+
+  public synchronized void increament() {
+    years++;
+  }
+
   public void setPostGrad(int postGrad) {
-    if (postGrad > 3 || postGrad < 0) {
+    if (postGrad > 2 || postGrad < 0) {
       throw new IllegalArgumentException("PostGraduate Level must be between 0 and 3");
     } else {
       this.postGrad = postGrad;
     }
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  /**
+   * @param noChildren the noChildren to set
+   */
+  public void setNoChildren(int noChildren) {
+    if (noChildren < 0) {
+      System.out.println("Λάθος δεν επιτρέπεται αρνητικός αριθμός παιδιών");
+    } else {
+      this.noChildren = noChildren;
+    }
+  }
+
+  // bonus = (10 * years) + 50 + (noChildren * 30) + amount;
+
+  // Printing Employee
   public void printEmployee() {
-    System.out.println("Printing Name: " + name);
+    System.out.println("==============================");
+    System.out.println("Ονοματεπώνυμο: " + name);
+    System.out.println("Βαθμίδα Εκπαίδευσης: " + education);
     switch (postGrad) {
     case 0:
-      System.out.println("PostGrad Level : None");
+      System.out.println("Μεταπτυχιακές Σπουδές : δεν έχει");
       break;
     case 1:
-      System.out.println("PostGrad Level : MSc");
+      System.out.println("Μεταπτυχιακές Σπουδές : Μεταπτυχιακό");
       break;
     case 2:
-      System.out.println("PostGrad Level : PhD");
+      System.out.println("Μεταπτυχιακές Σπουδές : Διδακτορικό");
       break;
     default:
       break;
     }
+    System.out.println("Έτη Υπηρεσίας: " + years);
     if (married) {
-      System.out.println("Κατάσταση: Έγγαμος");
+      System.out.println("Οικογενειακή Κατάσταση: Έγγαμος");
     } else {
-      System.out.println("Κατάσταση: Άγγαμος");
+      System.out.println("Οικογενειακή Κατάσταση: Άγγαμος");
     }
+    System.out.println("Αριθμός Ανηλίκων Παιδιών: " + noChildren);
+    System.out.println("Μισθός: " + salary + " euros");
+    if (postGrad == 0) {
+      bonus = 0;
+    } else if (postGrad == 1) {
+      bonus = 50;
+    } else {
+      bonus = 100;
+    }
+    System.out.println("Bonus: " + (salary + (10 * years) + 50 + (noChildren * 30) + bonus) + " euros");
 
-  }
-
-  public void setName(String name) {
-    this.name = name;
+    System.out.println("==============================");
   }
 
 }
