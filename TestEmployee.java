@@ -23,5 +23,6 @@ public class TestEmployee {
     System.out.println("*** Υπολογισμός μηνιαίου εισοδήματος του/της " + employee2.getName());
     employee2.setBonus(); // υπολογισμός bonus
     employee2.printEmployee(); // εκτύπωση 2ου εργαζόμενου
+
   }
 }

@@ -75,8 +75,9 @@ public class Employee {
    * @param postGrad the postGrad to set
    */
   public void setPostGrad(int postGrad) {
-
-    this.postGrad = postGrad;
+    if (postGrad == 1 || postGrad == 1 || postGrad == 2) {
+      this.postGrad = postGrad;
+    }
   }
 
   /**
