@@ -9,7 +9,7 @@
  * Create a class for Employee
  */
 public class Employee {
-  // Question 1
+
   private String name;
   private String education;
   private int postGrad;
@@ -20,88 +20,98 @@ public class Employee {
   private int bonus;
 
   // Constructor
-  public Employee(String fullName, String anEducation, int levelGrad, int noc, boolean ifMarried, int aNoChildren,
+  public Employee(String fullName, String anEducation, int levelGrad, int noOfYears, boolean ifMarried, int aNoChildren,
       int aSalary) {
     name = fullName;
     education = anEducation;
-    if (anEducation == "ΥΕ" || anEducation == "ΠΕ" || anEducation == "ΔΕ") {
-      this.education = anEducation;
-    } else {
-      throw new IllegalArgumentException("Η Βαθμίδα εκπαίδευσης θα πρέπει να είναι: ΥΕ, ΠΕ ή ΔΕ");
-    }
-
     postGrad = levelGrad;
-    if (levelGrad > 3 || levelGrad < 0) {
-      throw new IllegalArgumentException("Παίρνει τιμές -> 0: δεν έχει, 1: Μεταπτυχιακό και 2: Διδακτορικό");
-    } else {
-      this.postGrad = levelGrad;
-    }
-
-    years = noc;
+    years = noOfYears;
     married = ifMarried;
     noChildren = aNoChildren;
     salary = aSalary;
     bonus = 0;
   }
 
-  // Getters
+  // Getters and Setters
 
   /**
-   * @return the name
+   * @return String return the name
    */
   public String getName() {
     return name;
   }
 
   /**
-   * @return the years
+   * @param name the name to set
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  /**
+   * @return String return the education
+   */
+  public String getEducation() {
+    return education;
+  }
+
+  /**
+   * @param education the education to set
+   */
+  public void setEducation(String education) {
+    if (education == "ΥΕ" || education == "ΔΕ" || education == "ΠΕ") {
+      this.education = education;
+    }
+  }
+
+  /**
+   * @return int return the postGrad
+   */
+  public int getPostGrad() {
+    return postGrad;
+  }
+
+  /**
+   * @param postGrad the postGrad to set
+   */
+  public void setPostGrad(int postGrad) {
+
+    this.postGrad = postGrad;
+  }
+
+  /**
+   * @return int return the years
    */
   public int getYears() {
     return years;
   }
 
   /**
-   * @return the bonus
-   */
-  public int getBonus() {
-    return bonus;
-  }
-
-  /**
    * @param years the years to set
    */
-  public void setYears(int years) {
-    this.years = years;
-  }
-
-  public synchronized void increament() {
+  public void setYears() {
     years++;
   }
 
   /**
-   * @param bonus the bonus to set
+   * @return boolean return the married
    */
-  public void setBonus(int bonus) {
-    if (postGrad == 0) {
-      bonus = 0;
-    } else if (postGrad == 1) {
-      bonus = 50;
-    } else {
-      bonus = 100;
-    }
-    this.bonus = (salary + (10 * years) + 50 + (noChildren * 30) + bonus);
+  public boolean isMarried() {
+    return married;
   }
 
-  public void setPostGrad(int postGrad) {
-    if (postGrad > 2 || postGrad < 0) {
-      throw new IllegalArgumentException("PostGraduate Level must be between 0 and 3");
-    } else {
-      this.postGrad = postGrad;
-    }
+  /**
+   * @param married the married to set
+   */
+  public void setMarried(boolean married) {
+    this.married = married;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  /**
+   * @return int return the noChildren
+   */
+  public int getNoChildren() {
+    return noChildren;
   }
 
   /**
@@ -115,7 +125,45 @@ public class Employee {
     }
   }
 
-  // bonus = (10 * years) + 50 + (noChildren * 30) + amount;
+  /**
+   * @return int return the salary
+   */
+  public int getSalary() {
+    return salary;
+  }
+
+  /**
+   * @param salary the salary to set
+   */
+  public void setSalary(int salary) {
+    this.salary = salary;
+  }
+
+  /**
+   * @return int return the bonus
+   */
+  public int getBonus() {
+    return bonus;
+  }
+
+  /**
+   * @param bonus the bonus to set
+   */
+  // bonus = (10 * years) + 50(ifmarried) + (noChildren * 30) + salary;
+  public void setBonus() {
+    if (postGrad == 0) {
+      bonus = 0;
+    } else if (postGrad == 1) {
+      bonus = 50;
+    } else {
+      bonus = 100;
+    }
+    if (married) {
+      this.bonus = ((10 * years) + 50 + (noChildren * 30) + bonus);
+    } else {
+      this.bonus = ((10 * years) + (noChildren * 30) + bonus);
+    }
+  }
 
   // Printing Employee
   public void printEmployee() {
@@ -127,10 +175,10 @@ public class Employee {
       System.out.println("Μεταπτυχιακές Σπουδές : δεν έχει");
       break;
     case 1:
-      System.out.println("Μεταπτυχιακές Σπουδές : Μεταπτυχιακό");
+      System.out.println("Μεταπτυχιακές Σπουδές : Μεταπτυχιακό δίπλωμα");
       break;
     case 2:
-      System.out.println("Μεταπτυχιακές Σπουδές : Διδακτορικό");
+      System.out.println("Μεταπτυχιακές Σπουδές : Διδακτορικό δίπλωμα");
       break;
     default:
       break;
@@ -143,12 +191,7 @@ public class Employee {
     }
     System.out.println("Αριθμός Ανηλίκων Παιδιών: " + noChildren);
     System.out.println("Μισθός: " + salary + " euros");
-    if (bonus == 0) {
-      System.out.println("Μηνιαίο εισόδημα: " + salary + " euros");
-    } else {
-      System.out.println("Bonus: " + bonus + " euros");
-    }
-
+    System.out.println("Μηνιαίο εισόδημα: " + (salary + bonus) + "euros");
     System.out.println("==============================");
   }
 
