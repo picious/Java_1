@@ -191,7 +191,7 @@ public class Employee {
     }
     System.out.println("Αριθμός Ανηλίκων Παιδιών: " + noChildren);
     System.out.println("Μισθός: " + salary + " euros");
-    System.out.println("Μηνιαίο εισόδημα: " + (salary + bonus) + "euros");
+    System.out.println("Μηνιαίο εισόδημα: " + (salary + bonus) + " euros");
     System.out.println("==============================");
   }
 

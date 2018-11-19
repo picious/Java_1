@@ -19,6 +19,7 @@ public class TestEmployee {
     employee1.setNoChildren(0); // θέτουμε αριθμό παιδιών 0
     System.out.println("*** Υπολογισμός μηνιαίου εισοδήματος του/της " + employee1.getName());
     employee1.setBonus(); // υπολογισμός bonus
+    employee1.printEmployee(); // εκτύπωση στοιχεία 1ου εργαζόμενου
     System.out.println("*** Υπολογισμός μηνιαίου εισοδήματος του/της " + employee2.getName());
     employee2.setBonus(); // υπολογισμός bonus
     employee2.printEmployee(); // εκτύπωση 2ου εργαζόμενου
